@@ -1,103 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Learn the basics of semantic HTML, accessibility, and SEO-friendly web design."
-    />
-    <meta
-      name="keywords"
-      content="HTML5, semantic HTML, accessibility, SEO, web development"
-    />
-    <meta name="author" content="Your Name" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Learn the basics of semantic HTML, accessibility, and SEO-friendly web design." />
+    <meta name="keywords" content="HTML5, semantic HTML, accessibility, SEO, web development" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Semantic HTML and Accessibility Guide" />
+    <meta property="og:description" content="A concise, modern, SEO-friendly primer on semantic HTML and accessibility best practices." />
+    <meta property="og:image" content="semantic-html.png" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="canonical" href="https://example.com/semantic-html-accessibility" />
+    <link rel="icon" href="favicon.ico" />
+
     <title>Semantic HTML and Accessibility</title>
+
+    <style>
+      /* ---------  Theme  --------- */
+      :root {
+        --bg: #ffffff;
+        --fg: #0f172a; /* slate-900 */
+        --muted: #475569; /* slate-600 */
+        --accent: #2563eb; /* blue-600 */
+        --surface: #f8fafc; /* slate-50 */
+        --ring: #94a3b8; /* slate-400 */
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1020;
+          --fg: #e5e7eb;
+          --muted: #cbd5e1;
+          --accent: #60a5fa;
+          --surface: #0f172a;
+          --ring: #334155;
+        }
+      }
+      * { box-sizing: border-box; }
+      html:focus-within { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html:focus-within { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      }
+      body {
+        margin: 0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        color: var(--fg); background: var(--bg);
+      }
+      .container { max-width: 70ch; margin: 0 auto; padding: 1rem; }
+
+      /* --------- Accessibility --------- */
+      .skip-link {
+        position: absolute; left: 0; top: 0; transform: translateY(-120%);
+        background: var(--accent); color: #fff; padding: .5rem .75rem; border-radius: .5rem; z-index: 1000;
+      }
+      .skip-link:focus { transform: translateY(0); outline: none; }
+
+      a { color: var(--accent); }
+      a:focus-visible, button:focus-visible, [role="button"]:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: .5rem; }
+
+      header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--ring);
+      }
+      nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: .75rem; flex-wrap: wrap; }
+      nav a { display: inline-block; padding: .5rem .75rem; border-radius: .75rem; text-decoration: none; color: var(--fg); }
+      nav a[aria-current="true"], nav a:hover { background: var(--accent); color: #fff; }
+
+      h1, h2, h3 { line-height: 1.2; }
+      h1 { font-size: clamp(1.75rem, 2.5vw + 1rem, 2.25rem); margin: 0; }
+      h2 { margin-top: 2rem; font-size: 1.5rem; }
+      h3 { margin-top: 1.25rem; font-size: 1.125rem; }
+
+      main p { margin-block: .75rem; }
+      code { background: #0000000d; padding: .15rem .35rem; border-radius: .35rem; }
+      figure { margin: 1rem 0; }
+      figcaption { color: var(--muted); font-size: .95rem; }
+
+      footer {
+        margin-top: 3rem; padding: 1rem 0; border-top: 1px solid var(--ring); color: var(--muted);
+      }
+      .back-to-top { text-align: right; margin-top: 2rem; }
+    </style>
+
+    <!-- Structured -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Semantic HTML and Accessibility",
+        "description": "Learn the basics of semantic HTML, accessibility, and SEO-friendly web design.",
+        "author": { "@type": "Person", "name": "Fancy Nateku" }
+      }
+    </script>
   </head>
   <body>
-    <header role="banner">
-      <h1>Semantic HTML and Accessibility Guide</h1>
-      <nav role="navigation" aria-label="Main navigation">
-        <ul>
-          <li><a href="#introduction">Introduction</a></li>
-          <li><a href="#semantic">Semantic HTML</a></li>
-          <li><a href="#accessibility">Accessibility</a></li>
-          <li><a href="#conclusion">Conclusion</a></li>
-        </ul>
-      </nav>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header>
+      <div class="container" role="banner">
+        <h1>Semantic HTML and Accessibility Guide</h1>
+        <nav aria-label="Primary navigation">
+          <ul>
+            <li><a href="#introduction" aria-current="true">Introduction</a></li>
+            <li><a href="#semantic">Semantic HTML</a></li>
+            <li><a href="#accessibility">Accessibility</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <main role="main">
-      <section id="introduction">
-        <h2>Introduction</h2>
+    <main id="main" class="container">
+      <section id="introduction" aria-labelledby="intro-title">
+        <h2 id="intro-title">Introduction</h2>
         <p>
-          Welcome to this guide on creating web pages using semantic HTML5
-          elements with accessibility and SEO best practices in mind.
+          Welcome to this guide on creating web pages using semantic HTML5 elements with accessibility and SEO best practices in mind.
+        </p>
+        <p>
+          This page demonstrates inclusive landmarks, keyboard-friendly navigation, readable typography, and metadata that helps search engines and social platforms.
         </p>
       </section>
 
-      <section id="semantic">
-        <h2>Semantic HTML</h2>
-        <article>
-          <h3>Why Semantics Matter</h3>
+      <section id="semantic" aria-labelledby="semantic-title">
+        <h2 id="semantic-title">Semantic HTML</h2>
+
+        <article aria-labelledby="why-semantics">
+          <h3 id="why-semantics">Why Semantics Matter</h3>
           <p>
-            Semantic elements clearly describe their meaning to both the browser
-            and the developer. Examples include <code>&lt;article&gt;</code>,
-            <code>&lt;section&gt;</code>, and <code>&lt;aside&gt;</code>.
+            Semantic elements clearly describe their meaning to both the browser and the developer. Examples include <code>&lt;article&gt;</code>,
+            <code>&lt;section&gt;</code>, and <code>&lt;aside&gt;</code>. They improve accessibility, SEO, and maintainability.
           </p>
         </article>
-        <article>
-          <h3>Common Semantic Elements</h3>
+
+        <article aria-labelledby="common-elements">
+          <h3 id="common-elements">Common Semantic Elements</h3>
           <ul>
-            <li>
-              <strong>&lt;header&gt;</strong>: Introductory content or
-              navigational links.
-            </li>
-            <li>
-              <strong>&lt;main&gt;</strong>: Main content of the document.
-            </li>
-            <li>
-              <strong>&lt;footer&gt;</strong>: Footer for the document or a
-              section.
-            </li>
+            <li><strong>&lt;header&gt;</strong>: Introductory content or navigational links.</li>
+            <li><strong>&lt;main&gt;</strong>: Main content of the document.</li>
+            <li><strong>&lt;footer&gt;</strong>: Footer for the document or a section.</li>
+            <li><strong>&lt;nav&gt;</strong>: A section of navigation links.</li>
+            <li><strong>&lt;aside&gt;</strong>: Content related to the main content (like side notes or tips).</li>
           </ul>
         </article>
+
+        <aside aria-label="Pro tip">
+          <p>
+            Tip: Avoid redundant ARIA roles on native landmark elements. For example, <code>&lt;main&gt;</code> already exposes the <em>main</em> landmark to assistive technologies.
+          </p>
+        </aside>
       </section>
 
-      <section id="accessibility">
-        <h2>Accessibility</h2>
-        <article>
-          <h3>Using ARIA and Landmarks</h3>
+      <section id="accessibility" aria-labelledby="a11y-title">
+        <h2 id="a11y-title">Accessibility</h2>
+
+        <article aria-labelledby="aria-landmarks">
+          <h3 id="aria-landmarks">Using ARIA and Landmarks</h3>
           <p>
-            ARIA roles like <code>role="navigation"</code> help screen readers
-            understand the page structure. HTML5 landmarks like
-            <code>&lt;main&gt;</code> and <code>&lt;footer&gt;</code> enhance
-            this further.
+            Prefer semantic HTML first, then add ARIA only when necessary. Landmarks like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> help screen reader users navigate quickly.
           </p>
         </article>
-        <article>
-          <h3>Images and Text Alternatives</h3>
+
+        <article aria-labelledby="images-text-alt">
+          <h3 id="images-text-alt">Images and Text Alternatives</h3>
           <figure>
-            <img
-              src="semantic-html.png"
-              alt="Diagram showing semantic HTML structure"
-            />
+            <img src="semantic-html.png" width="1200" height="630" alt="Diagram showing a page structured with header, navigation, main, sections, and footer." loading="lazy" decoding="async" />
             <figcaption>Figure 1: Semantic HTML structure diagram</figcaption>
           </figure>
         </article>
       </section>
 
-      <section id="conclusion">
-        <h2>Conclusion</h2>
+      <section id="conclusion" aria-labelledby="conclusion-title">
+        <h2 id="conclusion-title">Conclusion</h2>
         <p>
-          By combining semantic HTML, accessibility practices, and SEO-friendly
-          content, you create inclusive and discoverable websites for all users.
+          By combining semantic HTML, accessibility practices, and SEO-friendly content, you create inclusive and discoverable websites for all users.
         </p>
+        <div class="back-to-top"><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'})" role="button">Back to top ↑</a></div>
       </section>
     </main>
 
-    <footer role="contentinfo">
-      <p>&copy; 2025 Nateku. All rights reserved.</p>
+    <footer class="container" role="contentinfo">
+      <p>&copy; <time datetime="2025">2025</time> Fancy Nateku. All rights reserved.</p>
+      <p><small>Built with semantic HTML, inclusive design, and zero JavaScript dependencies.</small></p>
+      <noscript><p><small>JavaScript is disabled. All content remains fully usable.</small></p></noscript>
     </footer>
   </body>
 </html>
